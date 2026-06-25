@@ -82,6 +82,7 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
 .clr-btn:hover{background:#F5F5F5}
 .hist-empty{font-size:13px;color:#888;padding:.75rem 0}
 .hist-item{background:#fff;border:1px solid #EBEBEB;border-radius:10px;padding:.65rem 1rem;margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.selo{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:99px;margin-top:4px;margin-left:4px;font-weight:700;background:#FDE8D4;color:#F47920;border:1px solid #F47920}
 .hi-name{font-size:13px;font-weight:700;color:#1A1A1A}
 .hi-meta{font-size:11px;color:#888;margin-top:3px}
 .hi-date{font-size:11px;color:#1D9E75;margin-top:2px}
@@ -165,6 +166,7 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
   var CHATS = ['202941865','5947676402'];
   var TASKS_KEY = 'cn_tasks_v15';
   var HIST_KEY  = 'cn_hist_v15';
+  var SENT_KEY  = 'cn_sent_v15';
 
   // ── Tarefas ────────────────────────────────────────
   var GROUPS = [
@@ -208,7 +210,7 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
 
   var FREQ_LBL = {diario:'Diario', semanal:'Semanal', mensal:'Mensal', continuo:'Continuo'};
   var ALL = GROUPS.reduce(function(a,g){ return a.concat(g.tasks.map(function(t){ return Object.assign({},t,{group:g.label}); })); }, []);
-  var state = {}, hist = [], photos = [], currentTab = 'todas';
+  var state = {}, hist = [], sent = {}, photos = [], currentTab = 'todas';
 
   // ── Utils ──────────────────────────────────────────
   function fmtDate(iso){
@@ -244,14 +246,17 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
   function saveState(){
     try{ localStorage.setItem(TASKS_KEY, JSON.stringify(state)); } catch(e){}
     try{ localStorage.setItem(HIST_KEY,  JSON.stringify(hist));  } catch(e){}
+    try{ localStorage.setItem(SENT_KEY,  JSON.stringify(sent));  } catch(e){}
   }
   function loadState(){
     try{ var s = localStorage.getItem(TASKS_KEY); if(s) state = JSON.parse(s); } catch(e){}
     try{ var h = localStorage.getItem(HIST_KEY);  if(h) hist  = JSON.parse(h); } catch(e){}
     if(!Array.isArray(hist)) hist = [];
+    try{ var sv = localStorage.getItem(SENT_KEY); if(sv) sent = JSON.parse(sv); } catch(e){}
     var changed = false;
     ALL.forEach(function(t){
       if(state[t.id] && shouldReset(t.freq, state[t.id])){ delete state[t.id]; changed = true; }
+      if(sent[t.id]  && shouldReset(t.freq, sent[t.id])){  delete sent[t.id];  changed = true; }
     });
     if(changed) saveState();
     render();
@@ -423,9 +428,10 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
         var done = !!state[t.id];
         var div  = document.createElement('div'); div.className = 'task' + (done ? ' done' : '');
         var da   = done ? '<div class="tdone"><i class="ti ti-check" style="font-size:11px;vertical-align:-1px"></i> Marcado em ' + fmtDate(state[t.id]) + '</div>' : '';
+        var selo = sent[t.id] ? '<span class="selo"><i class="ti ti-send" style="font-size:11px"></i> Enviado em ' + fmtDate(sent[t.id]) + '</span>' : '';
         div.innerHTML = '<div class="chk"><svg viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 4,8 8.5,2.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
           + '<div class="tbody"><div class="tname">' + t.name + '</div>'
-          + '<div class="tdesc">' + t.desc + '</div>' + da
+          + '<div class="tdesc">' + t.desc + '</div>' + da + selo
           + '<span class="badge ' + t.freq + '">' + FREQ_LBL[t.freq] + '</span></div>';
         div.onclick = function(){ toggle(t.id); };
         list.appendChild(div);
