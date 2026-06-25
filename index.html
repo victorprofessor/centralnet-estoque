@@ -5,73 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CentralNet - Painel de Estoque</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5rem}
+body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1rem}
 .root{max-width:860px;margin:0 auto}
-.header{background:#1A3A6B;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:16px;font-weight:700;color:#fff}
-.sub{font-size:12px;color:#F47920;margin-top:2px}
-.hdate{font-size:12px;color:#B5D4F4}
-.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1rem}
-.metric{background:#fff;border-radius:10px;padding:.85rem 1rem;box-shadow:0 1px 4px rgba(0,0,0,.07)}
-.ml{font-size:12px;color:#666;margin-bottom:4px}
-.mv{font-size:22px;font-weight:700;color:#1A3A6B}
-.ms{font-size:11px;color:#888;margin-top:2px}
+.header{background:#1A3A6B;border-radius:12px;padding:.85rem 1rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.brand{font-size:15px;font-weight:700;color:#fff}
+.sub{font-size:11px;color:#F47920;margin-top:2px}
+.hdate{font-size:11px;color:#B5D4F4}
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1rem}
+.metric{background:#fff;border-radius:10px;padding:.75rem .85rem;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.ml{font-size:11px;color:#666;margin-bottom:3px}
+.mv{font-size:20px;font-weight:700;color:#1A3A6B}
+.ms{font-size:10px;color:#888;margin-top:1px}
 .prog-wrap{margin-bottom:1rem}
 .prog-row{display:flex;justify-content:space-between;font-size:12px;color:#666;margin-bottom:5px}
 .prog-bar{height:6px;background:#E0E0E0;border-radius:99px;overflow:hidden}
 .prog-fill{height:100%;background:#1D9E75;border-radius:99px;transition:width .4s}
-.finish-box{background:#fff;border-radius:10px;padding:1rem;margin-bottom:1.25rem;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.finish-box{background:#fff;border-radius:10px;padding:.85rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 .ftitle{font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:.5rem}
 .finfo{font-size:12px;color:#666;margin-bottom:.75rem}
 .finfo strong{color:#1A1A1A}
-.photo-area{border:1.5px dashed #CCC;border-radius:10px;padding:.85rem;margin-bottom:.75rem;text-align:center;cursor:pointer;transition:border-color .15s}
-.photo-area:hover{border-color:#1A3A6B}
+.photo-area{border:1.5px dashed #CCC;border-radius:10px;padding:.85rem;margin-bottom:.75rem;text-align:center;cursor:pointer;transition:border-color .15s;-webkit-tap-highlight-color:transparent}
+.photo-area:active{border-color:#1A3A6B}
 .photo-area input{display:none}
-.pa-icon{font-size:26px;color:#F47920;display:block;margin-bottom:4px}
+.pa-icon{font-size:28px;color:#F47920;display:block;margin-bottom:4px}
 .pa-txt{font-size:12px;color:#666}
 .thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;justify-content:center}
-.tw{position:relative;width:76px;height:76px}
-.tw img{width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid #DDD}
-.tw .rm{position:absolute;top:-5px;right:-5px;width:18px;height:18px;background:#A32D2D;border-radius:50%;border:none;cursor:pointer;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tw{position:relative;width:72px;height:72px}
+.tw img{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #DDD}
+.tw .rm{position:absolute;top:-5px;right:-5px;width:20px;height:20px;background:#A32D2D;border-radius:50%;border:none;cursor:pointer;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .field-area{margin-bottom:.75rem}
 .field-area label{font-size:12px;color:#666;display:flex;align-items:center;gap:5px;margin-bottom:5px}
 .field-area label i{color:#F47920;font-size:15px}
-.field-input{width:100%;padding:8px 12px;border:1px solid #CCC;border-radius:8px;font-size:13px;color:#1A1A1A;outline:none;transition:border-color .15s}
+.field-input{width:100%;padding:10px 12px;border:1px solid #CCC;border-radius:8px;font-size:16px;color:#1A1A1A;outline:none;transition:border-color .15s}
 .field-input:focus{border-color:#1A3A6B}
 .field-input::placeholder{color:#AAA}
 .finish-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.finish-btn{font-size:13px;padding:9px 22px;border-radius:8px;border:none;background:#1A3A6B;color:#fff;cursor:pointer;font-weight:700;transition:opacity .2s}
+.finish-btn{font-size:14px;padding:12px 24px;border-radius:8px;border:none;background:#1A3A6B;color:#fff;cursor:pointer;font-weight:700;transition:opacity .2s;width:100%;-webkit-tap-highlight-color:transparent}
 .finish-btn:disabled{opacity:.4;cursor:not-allowed}
-.finish-btn:not(:disabled):hover{opacity:.85}
-.photo-count{font-size:12px;color:#888}
+.finish-btn:active{opacity:.85}
+.photo-count{font-size:12px;color:#888;text-align:center;width:100%}
 .tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
-.tab{font-size:12px;padding:5px 14px;border-radius:99px;border:1px solid #CCC;background:transparent;color:#555;cursor:pointer}
+.tab{font-size:11px;padding:5px 12px;border-radius:99px;border:1px solid #CCC;background:transparent;color:#555;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .tab.active{background:#1A3A6B;color:#fff;border-color:#1A3A6B}
 .group-lbl{font-size:11px;font-weight:700;color:#888;letter-spacing:.05em;text-transform:uppercase;margin:1rem 0 6px;display:flex;align-items:center;gap:6px}
-.group-lbl i{font-size:15px}
-.task-list{display:flex;flex-direction:column;gap:7px}
-.task{background:#fff;border:1px solid #EBEBEB;border-radius:10px;padding:.7rem 1rem;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:background .12s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.task:hover{background:#F0F5FF}
+.group-lbl i{font-size:14px}
+.task-list{display:flex;flex-direction:column;gap:8px}
+.task{background:#fff;border:1px solid #EBEBEB;border-radius:10px;padding:.75rem;display:flex;align-items:flex-start;gap:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.task:active{background:#F0F5FF}
 .task.done{opacity:.55}
 .task.done .tname{text-decoration:line-through}
-.chk{width:20px;height:20px;border-radius:50%;border:2px solid #CCC;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.chk{width:22px;height:22px;border-radius:50%;border:2px solid #CCC;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
 .task.done .chk{background:#1D9E75;border-color:#1D9E75}
-.chk svg{display:none;width:11px;height:11px}
+.chk svg{display:none;width:12px;height:12px}
 .task.done .chk svg{display:block}
 .tbody{flex:1;min-width:0}
-.tname{font-size:13px;font-weight:700;color:#1A1A1A}
+.tname{font-size:13px;font-weight:700;color:#1A1A1A;line-height:1.4}
 .tdesc{font-size:12px;color:#666;margin-top:2px;line-height:1.5}
 .tdone{font-size:11px;color:#1D9E75;margin-top:3px}
+.selo{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:99px;margin-top:4px;margin-left:4px;font-weight:700;background:#FDE8D4;color:#F47920;border:1px solid #F47920}
 .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:99px;margin-top:5px;font-weight:700}
 .badge.diario{background:#E6F1FB;color:#0C447C}
 .badge.semanal{background:#EEEDFE;color:#3C3489}
 .badge.mensal{background:#FAEEDA;color:#633806}
 .badge.continuo{background:#EAF3DE;color:#27500A}
-.toast-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none}
-.toast{background:#1D9E75;color:#fff;font-size:13px;padding:10px 20px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity .3s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.toast-wrap{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none;width:90%;max-width:400px}
+.toast{background:#1D9E75;color:#fff;font-size:13px;padding:10px 16px;border-radius:8px;text-align:center;white-space:normal;word-break:break-word;opacity:0;transition:opacity .3s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .toast.show{opacity:1}
 .toast.err{background:#A32D2D}
 .hist-section{margin-top:1.5rem}
@@ -79,13 +79,18 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
 .hist-title{font-size:13px;font-weight:700;color:#1A1A1A;display:flex;align-items:center;gap:6px}
 .hist-title i{font-size:17px;color:#F47920}
 .clr-btn{font-size:11px;padding:4px 12px;border-radius:8px;border:1px solid #CCC;background:transparent;color:#666;cursor:pointer;margin-left:auto}
-.clr-btn:hover{background:#F5F5F5}
 .hist-empty{font-size:13px;color:#888;padding:.75rem 0}
 .hist-item{background:#fff;border:1px solid #EBEBEB;border-radius:10px;padding:.65rem 1rem;margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.selo{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:99px;margin-top:4px;margin-left:4px;font-weight:700;background:#FDE8D4;color:#F47920;border:1px solid #F47920}
 .hi-name{font-size:13px;font-weight:700;color:#1A1A1A}
 .hi-meta{font-size:11px;color:#888;margin-top:3px}
 .hi-date{font-size:11px;color:#1D9E75;margin-top:2px}
+@media(min-width:480px){
+  body{padding:1.5rem}
+  .metrics{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+  .finish-btn{width:auto}
+  .photo-count{width:auto;text-align:left}
+  .task{padding:.7rem 1rem}
+}
 </style>
 </head>
 <body>
@@ -95,51 +100,48 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
 <div class="header">
   <div>
     <div class="brand">CentralNet Provedor</div>
-    <div class="sub">Gest&#227;o de Estoque &#8212; Vertical</div>
+    <div class="sub">Gestao de Estoque - Vertical</div>
   </div>
   <div class="hdate" id="hdate"></div>
 </div>
 
 <div class="metrics">
-  <div class="metric"><div class="ml">Acuracidade meta</div><div class="mv">98%</div><div class="ms">meta m&#237;nima</div></div>
-  <div class="metric"><div class="ml">Ruptura cr&#237;ticos</div><div class="mv">0</div><div class="ms">ocorr&#234;ncias/m&#234;s</div></div>
-  <div class="metric"><div class="ml">Giro de estoque</div><div class="mv">4&#215;</div><div class="ms">por ano</div></div>
+  <div class="metric"><div class="ml">Acuracidade meta</div><div class="mv">98%</div><div class="ms">meta minima</div></div>
+  <div class="metric"><div class="ml">Ruptura criticos</div><div class="mv">0</div><div class="ms">ocorrencias/mes</div></div>
+  <div class="metric"><div class="ml">Giro de estoque</div><div class="mv">4x</div><div class="ms">por ano</div></div>
   <div class="metric"><div class="ml">Carros conformes</div><div class="mv">100%</div><div class="ms">nas vistorias</div></div>
 </div>
 
 <div class="prog-wrap">
-  <div class="prog-row"><span>Tarefas di&#225;rias conclu&#237;das hoje</span><span id="prog-count">0 / 0</span></div>
+  <div class="prog-row"><span>Tarefas diarias concluidas hoje</span><span id="prog-count">0 / 0</span></div>
   <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
 </div>
 
 <div class="finish-box">
-  <div class="ftitle">Concluir verifica&#231;&#227;o</div>
-  <div class="finfo" id="finfo">Marque as tarefas, anexe fotos e clique em <strong>Enviar relat&#243;rio</strong>.</div>
-
+  <div class="ftitle">Concluir verificacao</div>
+  <div class="finfo" id="finfo">Marque as tarefas, anexe fotos e clique em <strong>Enviar relatorio</strong>.</div>
   <div class="photo-area" onclick="document.getElementById('photoInput').click()">
     <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(event)">
     <i class="ti ti-camera pa-icon"></i>
-    <span class="pa-txt">Toque aqui para anexar fotos de comprova&#231;&#227;o (m&#225;x. 10)</span>
+    <span class="pa-txt">Toque aqui para anexar fotos de comprovacao (max. 10)</span>
     <div class="thumbs" id="thumbs"></div>
   </div>
-
   <div class="field-area">
-    <label><i class="ti ti-car"></i>Identifica&#231;&#227;o do carro (placa ou nome)</label>
+    <label><i class="ti ti-car"></i>Identificacao do carro (placa ou nome)</label>
     <input class="field-input" type="text" id="carName" placeholder="Ex: Placa ABC-1234 ou Carro do Joao...">
   </div>
-
   <div class="finish-row">
-    <button class="finish-btn" id="finish-btn" onclick="finishVerification()">Enviar relat&#243;rio</button>
+    <button class="finish-btn" id="finish-btn" onclick="finishVerification()">Enviar relatorio</button>
     <span class="photo-count" id="photo-count"></span>
   </div>
 </div>
 
 <div class="tabs">
   <button class="tab active" onclick="setTab('todas',this)">Todas</button>
-  <button class="tab" onclick="setTab('diario',this)">Di&#225;rias</button>
+  <button class="tab" onclick="setTab('diario',this)">Diarias</button>
   <button class="tab" onclick="setTab('semanal',this)">Semanais</button>
   <button class="tab" onclick="setTab('mensal',this)">Mensais</button>
-  <button class="tab" onclick="setTab('continuo',this)">Cont&#237;nuas</button>
+  <button class="tab" onclick="setTab('continuo',this)">Continuas</button>
   <button class="tab" onclick="setTab('pendentes',this)">Pendentes</button>
 </div>
 
@@ -147,8 +149,8 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
 
 <div class="hist-section">
   <div class="hist-header">
-    <div class="hist-title"><i class="ti ti-history"></i>Hist&#243;rico de verifica&#231;&#245;es</div>
-    <button class="clr-btn" onclick="clearHist()">Limpar hist&#243;rico</button>
+    <div class="hist-title"><i class="ti ti-history"></i>Historico de verificacoes</div>
+    <button class="clr-btn" onclick="clearHist()">Limpar historico</button>
   </div>
   <div id="hist-list"></div>
 </div>
@@ -156,69 +158,68 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
 
 <script>
 (function(){
-  // ── Config ─────────────────────────────────────────
-  emailjs.init({publicKey:'OAeBACeJ7j9E22YHo'});
-  var SVC  = 'service_w772pci';
-  var TMPL = 'template_s0gb8gf';
-  var TO   = 'victorsilva@centralnetsurubim.com.br';
-  var BOT_TEXT  = '8781930117:AAEc-Htr1XCIrtcQne-kX64qH--hKMxtGow';
-  var BOT_FOTO  = '8644281726:AAEmoB7RzjNiTKv1hiqW_yktIL2NFfGsxjE';
-  var CHATS = ['202941865','5947676402'];
-  var TASKS_KEY = 'cn_tasks_v15';
-  var HIST_KEY  = 'cn_hist_v15';
-  var SENT_KEY  = 'cn_sent_v15';
+  // Config Telegram
+  var BOT_TEXT = '8781930117:AAEc-Htr1XCIrtcQne-kX64qH--hKMxtGow';
+  var BOT_FOTO = '8644281726:AAEmoB7RzjNiTKv1hiqW_yktIL2NFfGsxjE';
+  var CHATS    = ['202941865','5947676402'];
 
-  // ── Tarefas ────────────────────────────────────────
+  var TASKS_KEY = 'cn_tasks_v17';
+  var HIST_KEY  = 'cn_hist_v17';
+  var SENT_KEY  = 'cn_sent_v17';
+
   var GROUPS = [
     {label:'Estoque - Diario', icon:'ti-package', tasks:[
-      {id:'e1', name:'Conferir entradas e saidas do dia',       desc:'Registrar no sistema todas as movimentacoes: ONU/ONT, cabos, conectores, roteadores.', freq:'diario'},
-      {id:'e2', name:'Verificar nivel dos itens criticos',      desc:'Checar ONU/ONT, patch cord, cordao optico, splitters e conectores SC/APC.',           freq:'diario'},
-      {id:'e3', name:'Organizar bancada de triagem',            desc:'Separar equipamentos defeituosos, em teste e prontos para uso.',                       freq:'diario'},
-      {id:'e4', name:'Registrar baixas de campo',               desc:'Confirmar saidas de material usadas pelas equipes de instalacao e manutencao.',        freq:'diario'},
+      {id:'e1', name:'Conferir entradas e saidas do dia',      desc:'Registrar no sistema todas as movimentacoes: ONU/ONT, cabos, conectores, roteadores.', freq:'diario'},
+      {id:'e2', name:'Verificar nivel dos itens criticos',     desc:'Checar ONU/ONT, patch cord, cordao optico, splitters e conectores SC/APC.',           freq:'diario'},
+      {id:'e3', name:'Organizar bancada de triagem',           desc:'Separar equipamentos defeituosos, em teste e prontos para uso.',                       freq:'diario'},
+      {id:'e4', name:'Registrar baixas de campo',              desc:'Confirmar saidas de material usadas pelas equipes de instalacao e manutencao.',        freq:'diario'},
     ]},
     {label:'Estoque - Semanal', icon:'ti-package', tasks:[
-      {id:'e5', name:'Inventario rotativo semanal',             desc:'Contar fisicamente ao menos um grupo de itens e cruzar com o sistema.',                freq:'semanal'},
-      {id:'e6', name:'Relatorio de giro de estoque',            desc:'Identificar itens parados ha mais de 60 dias e avaliar reposicao.',                   freq:'semanal'},
-      {id:'e7', name:'Verificar validade de consumiveis',       desc:'Checar fitas, epoxi, alcool isopropilico e descartaveis.',                            freq:'semanal'},
-      {id:'e8', name:'Levantar necessidades de compra',         desc:'Projetar demanda do proximo periodo com base em instalacoes previstas.',               freq:'semanal'},
+      {id:'e5', name:'Inventario rotativo semanal',            desc:'Contar fisicamente ao menos um grupo de itens e cruzar com o sistema.',                freq:'semanal'},
+      {id:'e6', name:'Relatorio de giro de estoque',           desc:'Identificar itens parados ha mais de 60 dias e avaliar reposicao.',                   freq:'semanal'},
+      {id:'e7', name:'Verificar validade de consumiveis',      desc:'Checar fitas, epoxi, alcool isopropilico e descartaveis.',                            freq:'semanal'},
+      {id:'e8', name:'Levantar necessidades de compra',        desc:'Projetar demanda do proximo periodo com base em instalacoes previstas.',               freq:'semanal'},
     ]},
     {label:'Estoque - Mensal', icon:'ti-package', tasks:[
-      {id:'e9',  name:'Inventario geral (contagem cega)',       desc:'Contar todo o estoque sem consultar o sistema e comparar ao final.',                   freq:'mensal'},
-      {id:'e10', name:'Auditoria de acuracidade',               desc:'Calcular percentual de divergencias e registrar causas raiz.',                        freq:'mensal'},
-      {id:'e11', name:'Revisao de fornecedores',                desc:'Avaliar prazo, qualidade e preco dos ultimos 30 dias.',                               freq:'mensal'},
+      {id:'e9',  name:'Inventario geral (contagem cega)',      desc:'Contar todo o estoque sem consultar o sistema e comparar ao final.',                   freq:'mensal'},
+      {id:'e10', name:'Auditoria de acuracidade',              desc:'Calcular percentual de divergencias e registrar causas raiz.',                        freq:'mensal'},
+      {id:'e11', name:'Revisao de fornecedores',               desc:'Avaliar prazo, qualidade e preco dos ultimos 30 dias.',                               freq:'mensal'},
     ]},
     {label:'Veiculos - Diario', icon:'ti-car', tasks:[
-      {id:'v1', name:'Checar limpeza interna dos carros',       desc:'Verificar se o interior esta limpo e livre de lixo, restos de cabos e sujeira.',      freq:'diario'},
-      {id:'v2', name:'Checar limpeza externa dos carros',       desc:'Avaliar se a lataria e vidros estao limpos e com boa apresentacao.',                  freq:'diario'},
+      {id:'v1', name:'Checar limpeza interna dos carros',      desc:'Verificar se o interior esta limpo e livre de lixo, restos de cabos e sujeira.',      freq:'diario'},
+      {id:'v2', name:'Checar limpeza externa dos carros',      desc:'Avaliar se a lataria e vidros estao limpos e com boa apresentacao.',                  freq:'diario'},
     ]},
     {label:'Veiculos - Semanal', icon:'ti-car', tasks:[
-      {id:'v2b', name:'Abastecer os carros',                    desc:'Reabastecer todos os veiculos dos tecnicos. Tarefa das segundas e quintas-feiras.',    freq:'semanal'},
-      {id:'v3',  name:'Vistoria de organizacao do bau',         desc:'Verificar se ferramentas, caixas e materiais estao organizados e identificados.',     freq:'semanal'},
-      {id:'v4',  name:'Conferir kit de material dos tecnicos',  desc:'Checar se cada carro tem o kit padrao: ferramentas, EPI, conectores, cordao optico.', freq:'semanal'},
-      {id:'v5',  name:'Verificar validade dos EPI no veiculo',  desc:'Checar capacete, luva, oculos, cinto e demais EPIs obrigatorios.',                   freq:'semanal'},
+      {id:'v2b', name:'Abastecer os carros',                   desc:'Reabastecer todos os veiculos dos tecnicos. Tarefa das segundas e quintas-feiras.',    freq:'semanal'},
+      {id:'v3',  name:'Vistoria de organizacao do bau',        desc:'Verificar se ferramentas, caixas e materiais estao organizados e identificados.',     freq:'semanal'},
+      {id:'v4',  name:'Conferir kit de material dos tecnicos', desc:'Checar se cada carro tem o kit padrao: ferramentas, EPI, conectores, cordao optico.', freq:'semanal'},
+      {id:'v5',  name:'Verificar validade dos EPI no veiculo', desc:'Checar capacete, luva, oculos, cinto e demais EPIs obrigatorios.',                   freq:'semanal'},
     ]},
     {label:'Veiculos - Mensal', icon:'ti-car', tasks:[
-      {id:'v6', name:'Vistoria geral documentada',              desc:'Registrar com fotos o estado de organizacao, limpeza e material de cada veiculo.',     freq:'mensal'},
-      {id:'v7', name:'Feedback individual ao tecnico',          desc:'Apresentar resultado da vistoria mensal e registrar pontos de melhoria.',              freq:'mensal'},
+      {id:'v6', name:'Vistoria geral documentada',             desc:'Registrar com fotos o estado de organizacao, limpeza e material de cada veiculo.',     freq:'mensal'},
+      {id:'v7', name:'Feedback individual ao tecnico',         desc:'Apresentar resultado da vistoria mensal e registrar pontos de melhoria.',              freq:'mensal'},
     ]},
     {label:'Continuo', icon:'ti-refresh', tasks:[
-      {id:'c1', name:'Padronizar etiquetagem e localizacao',    desc:'Garantir que cada item tenha posicao fixa e identificacao clara.',                    freq:'continuo'},
-      {id:'c2', name:'Treinar equipe no registro de material',  desc:'Reduzir divergencias causadas por saidas nao registradas.',                           freq:'continuo'},
-      {id:'c3', name:'Reforcar padrao de organizacao dos carros',desc:'Manter checklist de organizacao visivel no veiculo e cobrar rotineiramente.',        freq:'continuo'},
+      {id:'c1', name:'Padronizar etiquetagem e localizacao',   desc:'Garantir que cada item tenha posicao fixa e identificacao clara.',                    freq:'continuo'},
+      {id:'c2', name:'Treinar equipe no registro de material', desc:'Reduzir divergencias causadas por saidas nao registradas.',                           freq:'continuo'},
+      {id:'c3', name:'Reforcar padrao de organizacao dos carros', desc:'Manter checklist de organizacao visivel no veiculo e cobrar rotineiramente.',      freq:'continuo'},
     ]},
   ];
 
   var FREQ_LBL = {diario:'Diario', semanal:'Semanal', mensal:'Mensal', continuo:'Continuo'};
-  var ALL = GROUPS.reduce(function(a,g){ return a.concat(g.tasks.map(function(t){ return Object.assign({},t,{group:g.label}); })); }, []);
+  var ALL = GROUPS.reduce(function(a,g){
+    return a.concat(g.tasks.map(function(t){ return Object.assign({},t,{group:g.label}); }));
+  },[]);
+
   var state = {}, hist = [], sent = {}, photos = [], currentTab = 'todas';
 
-  // ── Utils ──────────────────────────────────────────
   function fmtDate(iso){
     var d = new Date(iso);
     return d.toLocaleDateString('pt-BR') + ' as ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   }
   function today(){ return new Date().toISOString().slice(0,10); }
-  function weekStart(){
+  function getMondayOfWeek(){
+    // Retorna a segunda-feira da SEMANA ATUAL (inicio do ciclo semanal)
     var d = new Date(); d.setHours(0,0,0,0);
     d.setDate(d.getDate() - ((d.getDay()||7) - 1));
     return d.toISOString().slice(0,10);
@@ -227,12 +228,25 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
     var d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-01';
   }
+  function getMondayOfTs(ts){
+    // Retorna a segunda-feira da semana em que o timestamp foi criado
+    var d = new Date(ts); d.setHours(0,0,0,0);
+    d.setDate(d.getDate() - ((d.getDay()||7) - 1));
+    return d.toISOString().slice(0,10);
+  }
+  function getFirstOfMonthOfTs(ts){
+    // Retorna o dia 01 do mes em que o timestamp foi criado
+    var d = new Date(ts);
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-01';
+  }
   function shouldReset(freq, ts){
     if(!ts) return false;
-    var d = ts.slice(0,10);
-    if(freq === 'diario')  return d !== today();
-    if(freq === 'semanal') return d < weekStart();
-    if(freq === 'mensal')  return d < monthStart();
+    // Diario: reseta no dia seguinte
+    if(freq === 'diario') return ts.slice(0,10) !== today();
+    // Semanal: reseta quando a segunda-feira da semana do ts for anterior a segunda-feira atual
+    if(freq === 'semanal') return getMondayOfTs(ts) < getMondayOfWeek();
+    // Mensal: reseta quando o mes do ts for anterior ao mes atual
+    if(freq === 'mensal') return getFirstOfMonthOfTs(ts) < monthStart();
     return false;
   }
   function showToast(msg, err){
@@ -241,8 +255,6 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
     t.className = 'toast show' + (err ? ' err' : '');
     setTimeout(function(){ t.className = 'toast'; }, 3500);
   }
-
-  // ── Storage ────────────────────────────────────────
   function saveState(){
     try{ localStorage.setItem(TASKS_KEY, JSON.stringify(state)); } catch(e){}
     try{ localStorage.setItem(HIST_KEY,  JSON.stringify(hist));  } catch(e){}
@@ -251,8 +263,8 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
   function loadState(){
     try{ var s = localStorage.getItem(TASKS_KEY); if(s) state = JSON.parse(s); } catch(e){}
     try{ var h = localStorage.getItem(HIST_KEY);  if(h) hist  = JSON.parse(h); } catch(e){}
+    try{ var sv= localStorage.getItem(SENT_KEY);  if(sv) sent = JSON.parse(sv);} catch(e){}
     if(!Array.isArray(hist)) hist = [];
-    try{ var sv = localStorage.getItem(SENT_KEY); if(sv) sent = JSON.parse(sv); } catch(e){}
     var changed = false;
     ALL.forEach(function(t){
       if(state[t.id] && shouldReset(t.freq, state[t.id])){ delete state[t.id]; changed = true; }
@@ -262,7 +274,7 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
     render();
   }
 
-  // ── Fotos ──────────────────────────────────────────
+  // Fotos
   function resizeImage(file, maxW, maxH, quality, cb){
     var img = new Image(), url = URL.createObjectURL(file);
     img.onload = function(){
@@ -278,22 +290,20 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
     img.onerror = function(){ URL.revokeObjectURL(url); };
     img.src = url;
   }
-
   window.handlePhotos = function(e){
     var files = Array.from(e.target.files);
     if(photos.length + files.length > 10){ showToast('Maximo de 10 fotos.',true); return; }
     files.forEach(function(f){
       resizeImage(f, 1024, 1024, 0.85, function(b64){
-        photos.push({b64: b64, file: f});
+        photos.push({b64:b64});
         renderThumbs();
       });
     });
     e.target.value = '';
   };
-
   function renderThumbs(){
     var c = document.getElementById('thumbs'); c.innerHTML = '';
-    photos.forEach(function(p, i){
+    photos.forEach(function(p,i){
       var w = document.createElement('div'); w.className = 'tw';
       w.innerHTML = '<img src="' + p.b64 + '" alt="foto ' + (i+1) + '">'
         + '<button class="rm" onclick="removePhoto(' + i + ')">x</button>';
@@ -303,19 +313,50 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
   }
   window.removePhoto = function(i){ photos.splice(i,1); renderThumbs(); };
 
-  // ── Telegram ───────────────────────────────────────
-  async function sendTgPhoto(file, caption){
-    var url = 'https://api.telegram.org/bot' + BOT + '/sendPhoto';
+  // Telegram helpers
+  function b64toBlob(b64){
+    var parts = b64.split(',');
+    var mime = 'image/jpeg';
+    try{ mime = parts[0].match(/:(.*?);/)[1]; } catch(e){}
+    var byteStr = atob(parts[1]);
+    var ab = new ArrayBuffer(byteStr.length);
+    var ia = new Uint8Array(ab);
+    for(var k = 0; k < byteStr.length; k++) ia[k] = byteStr.charCodeAt(k);
+    return new Blob([ab], {type: mime});
+  }
+  async function tgSendText(text){
+    var url = 'https://api.telegram.org/bot' + BOT_TEXT + '/sendMessage';
+    for(var i = 0; i < CHATS.length; i++){
+      await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({chat_id: CHATS[i], text: text})
+      });
+    }
+  }
+  async function tgSendFotoText(text){
+    var url = 'https://api.telegram.org/bot' + BOT_FOTO + '/sendMessage';
+    for(var i = 0; i < CHATS.length; i++){
+      await fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({chat_id: CHATS[i], text: text})
+      });
+    }
+  }
+  async function tgSendPhoto(b64, caption){
+    var blob = b64toBlob(b64);
+    var url  = 'https://api.telegram.org/bot' + BOT_FOTO + '/sendPhoto';
     for(var i = 0; i < CHATS.length; i++){
       var fd = new FormData();
       fd.append('chat_id', CHATS[i]);
-      fd.append('photo', file, file.name);
+      fd.append('photo',   blob, 'foto.jpg');
       if(caption) fd.append('caption', caption);
       await fetch(url, {method:'POST', body:fd});
     }
   }
 
-  // ── Envio principal ────────────────────────────────
+  // Envio principal
   window.finishVerification = async function(){
     var done    = ALL.filter(function(t){ return !!state[t.id]; });
     var pending = ALL.filter(function(t){ return !state[t.id]; });
@@ -329,89 +370,77 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
     var timeStr = now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
     var carName = document.getElementById('carName').value.trim();
 
-    // Montar relatorio de texto
     var doneLines = 'CONCLUIDAS (' + done.length + '):\n'
-      + done.map(function(t){ return '  + ' + t.name + ' [' + FREQ_LBL[t.freq] + ']'; }).join('\n');
+      + done.map(function(t){ return '+ ' + t.name + ' [' + FREQ_LBL[t.freq] + ']'; }).join('\n');
     var pendLines = pending.length
       ? '\n\nPENDENTES (' + pending.length + '):\n'
-        + pending.map(function(t){ return '  - ' + t.name + ' [' + FREQ_LBL[t.freq] + ']'; }).join('\n')
+        + pending.map(function(t){ return '- ' + t.name + ' [' + FREQ_LBL[t.freq] + ']'; }).join('\n')
       : '\n\nTodas as tarefas concluidas!';
-    var carNote   = carName ? '\n\nCarro: ' + carName : '';
-    var photoNote = photos.length > 0
-      ? '\n\n' + photos.length + ' foto(s) de comprovacao enviada(s) via Telegram.'
-      : '\n\nSem fotos anexadas.';
 
+    var textOk = false, fotoOk = true;
+
+    // 1. Texto no Bot 1
     try{
-      // 1. E-mail com relatorio completo
-      await emailjs.send(SVC, TMPL, {
-        task_name:  'Relatorio de Verificacao - ' + dateStr,
-        task_group: done.length + ' de ' + ALL.length + ' tarefa(s) concluida(s)',
-        task_freq:  'Enviado as ' + timeStr,
-        task_date:  dateStr + ' as ' + timeStr,
-        task_user:  'Victor Silva',
-        to_email:   TO,
-        task_desc:  doneLines + pendLines + carNote + photoNote,
-      });
+      var msg = 'CentralNet - Relatorio de Verificacao\n'
+        + dateStr + ' as ' + timeStr + '\n'
+        + (carName ? 'Carro: ' + carName + '\n' : '')
+        + '\n' + doneLines + pendLines;
+      await tgSendText(msg);
+      textOk = true;
+    } catch(e){ textOk = false; }
 
-      // 2. Fotos no Telegram com referencia ao e-mail
-      if(photos.length > 0){
-        var legenda = 'Verificacao ' + dateStr + ' as ' + timeStr
-          + (carName ? ' | Carro: ' + carName : '')
-          + ' | Relatorio completo no e-mail.';
+    // 2. Fotos no Bot 2
+    if(photos.length > 0){
+      try{
         for(var i = 0; i < photos.length; i++){
-          var cap = i === 0 ? legenda : '(' + (i+1) + '/' + photos.length + ')';
-          await sendTgPhoto(photos[i].b64, cap);
+          var cap = (carName ? carName : 'Verificacao') + ' - ' + dateStr + ' as ' + timeStr
+            + ' (' + (i+1) + '/' + photos.length + ')';
+          await tgSendPhoto(photos[i].b64, cap);
         }
-      }
-
-      // Salvar historico
-      var ts = now.toISOString();
-      hist.unshift({date:ts, done:done.length, total:ALL.length, photos:photos.length,
-        doneNames: done.map(function(t){ return t.name; })});
-      if(hist.length > 50) hist = hist.slice(0,50);
-
-      photos = []; renderThumbs();
-      document.getElementById('carName').value = '';
-      saveState();
-      showToast('Relatorio no e-mail + fotos no Telegram!');
-      render();
-
-    }catch(e){
-      showToast('Falha ao enviar. Verifique a conexao.', true);
+      } catch(e){ fotoOk = false; }
     }
+
+    var ts = now.toISOString();
+    done.forEach(function(t){ sent[t.id] = ts; });
+    hist.unshift({date:ts, done:done.length, total:ALL.length, photos:photos.length,
+      doneNames: done.map(function(t){ return t.name; })});
+    if(hist.length > 50) hist = hist.slice(0,50);
+    photos = []; renderThumbs();
+    document.getElementById('carName').value = '';
+    saveState(); render();
+
+    if(textOk && fotoOk)        showToast('Relatorio + fotos enviados no Telegram!');
+    else if(textOk && !fotoOk)  showToast('Relatorio enviado! Falha nas fotos.', true);
+    else if(!textOk && fotoOk)  showToast('Fotos enviadas! Falha no relatorio.', true);
+    else                         showToast('Falha ao enviar. Verifique a conexao.', true);
 
     btn.disabled = false; btn.textContent = 'Enviar relatorio';
   };
 
-  // ── Tabs / Historico ───────────────────────────────
   window.setTab = function(tab, el){
     currentTab = tab;
     document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
     el.classList.add('active'); render();
   };
   window.clearHist = function(){ hist = []; saveState(); render(); };
-
   function toggle(id){
     if(state[id]) delete state[id]; else state[id] = new Date().toISOString();
     saveState(); render();
   }
 
-  // ── Render ─────────────────────────────────────────
   function render(){
     var now = new Date();
     document.getElementById('hdate').textContent =
       now.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric'});
-
     var ts    = today();
     var daily = ALL.filter(function(t){ return t.freq === 'diario'; });
     var dt    = daily.filter(function(t){ return state[t.id] && state[t.id].startsWith(ts); }).length;
     document.getElementById('prog-count').textContent = dt + ' / ' + daily.length;
     document.getElementById('prog-fill').style.width = Math.round(dt/daily.length*100) + '%';
-
     var td = ALL.filter(function(t){ return !!state[t.id]; }).length;
     document.getElementById('finfo').innerHTML = td > 0
-      ? '<strong>' + td + ' tarefa(s)</strong> marcada(s). Anexe fotos e clique em <strong>Enviar relatorio</strong>.'
-      : 'Marque as tarefas abaixo, anexe fotos e clique em <strong>Enviar relatorio</strong>.';
+      ? '<strong>' + td + ' tarefa(s)</strong> marcada(s). Clique em <strong>Enviar relatorio</strong>.'
+      : 'Marque as tarefas, anexe fotos e clique em <strong>Enviar relatorio</strong>.';
 
     var list = document.getElementById('task-list'); list.innerHTML = '';
     GROUPS.forEach(function(g){
@@ -419,11 +448,9 @@ body{font-family:Arial,sans-serif;background:#F4F6FB;color:#1A1A1A;padding:1.5re
       if(currentTab === 'pendentes') tasks = tasks.filter(function(t){ return !state[t.id]; });
       else if(currentTab !== 'todas') tasks = tasks.filter(function(t){ return t.freq === currentTab; });
       if(!tasks.length) return;
-
       var gl = document.createElement('div'); gl.className = 'group-lbl';
       gl.innerHTML = '<i class="ti ' + g.icon + '"></i>' + g.label;
       list.appendChild(gl);
-
       tasks.forEach(function(t){
         var done = !!state[t.id];
         var div  = document.createElement('div'); div.className = 'task' + (done ? ' done' : '');
